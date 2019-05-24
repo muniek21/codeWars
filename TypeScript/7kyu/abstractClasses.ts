@@ -1,16 +1,20 @@
+// https://www.codewars.com/kata/learning-typescript-classes-and-interfaces-abstract-classes/train/typescript
 export abstract class Animal {
     /** @param {number} value The length of the animal in parrots. */
-    protected constructor(public value: number) {}
+    value: number;
+    protected constructor(value: number) {
+        this.value = value;
+    }
 
-    abstract convertTo (someone: Animal): number;
+    convertTo (someone: Animal): number {
+        return this.value /someone.value
+
+    };
 }
 
 export class Boa extends Animal {
     constructor(){
         super(38);
-    }
-    convertTo(someone: Animal): number {
-        return 0;
     }
 }
 
@@ -18,18 +22,10 @@ export class Parrot extends Animal {
     constructor(){
         super(1);
     }
-
-    convertTo(someone: Animal): number {
-        return 0;
-    }
 }
 
 export class Monkey extends Animal {
     constructor(){
         super(7.6)
     };
-
-    convertTo(someone: Animal): number {
-        return 0;
-    }
 }
