@@ -7,7 +7,7 @@ export abstract class Animal {
     }
 
     convertTo (someone: Animal): number {
-        return this.value /someone.value
+        return this.value / someone.value
 
     };
 }
