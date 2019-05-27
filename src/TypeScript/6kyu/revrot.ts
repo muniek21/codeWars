@@ -1,18 +1,17 @@
 export class G964 {
     public static revrot(str, sz) {
-        // your code
-        if (sz <= 0 || str.empty() || sz > str.length){
+        if (sz <= 0 || str === "" || sz > str.length){
             return "";
         }
 
         let revrotedChunks: string[] = [];
 
-        divideString(str,sz).forEach(
+        let stringChunks: string[] = divideStringIntoChunksOfGivenSize(str, sz);
+        stringChunks.forEach(
             chunk => {
                 if (chunk.length < sz){
-                    revrotedChunks.push(chunk);
+                    return;
                 } else {
-
                     if (isSumOfCubes(chunk)){
                         revrotedChunks.push(reverseChunk(chunk));
                     } else {
@@ -26,7 +25,7 @@ export class G964 {
     }
 }
 
-function divideString(str: string, sz: number): string[]{
+function divideStringIntoChunksOfGivenSize(str: string, sz: number): string[]{
     let start: number = 0;
     let end: number = sz;
     let stringLength: number = str.length;
@@ -42,18 +41,25 @@ function divideString(str: string, sz: number): string[]{
 
 function isSumOfCubes(chunk: string): boolean {
     let sum: number = 0;
-   Array.from(chunk).forEach(
-       character => sum+= Math.pow(parseInt(character), 2)
-   );
-   console.log(Array.from(chunk));
-   console.log(sum);
-   return sum % 2 == 0;
+    let chunkCharacters = chunk.split("");
+    chunkCharacters.forEach(
+        character =>
+            sum+= Math.pow(parseInt(character), 2));
+    return sum % 2 == 0;
 }
 
 function reverseChunk(chunk: string): string{
-    return "";
+    let chunkCharacters: string[] = chunk.split("");
+    let reveresedChunkCharacters: string[] = [];
+    for (let i = chunkCharacters.length - 1; i >= 0; i--){
+        reveresedChunkCharacters.push(chunkCharacters[i]);
+    }
+
+    return reveresedChunkCharacters.join("");
 }
 
 function rotateChunkToTheLeft(chunk: string): string {
-    return "";
+    let firstCharacter = chunk.charAt(0);
+    let remainingCharacetsr = chunk.replace(firstCharacter, "");
+    return remainingCharacetsr.concat( firstCharacter);
 }
