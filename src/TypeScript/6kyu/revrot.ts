@@ -1,27 +1,14 @@
 export class G964 {
+
     public static revrot(str, sz) {
-        if (sz <= 0 || str === "" || sz > str.length){
+        if (sz <= 0 || str === "" || sz > str.length) {
             return "";
         }
 
-        let revrotedChunks: string[] = [];
-
         let stringChunks: string[] = divideStringIntoChunksOfGivenSize(str, sz);
-        stringChunks.forEach(
-            chunk => {
-                if (chunk.length < sz){
-                    return;
-                } else {
-                    if (isSumOfCubes(chunk)){
-                        revrotedChunks.push(reverseChunk(chunk));
-                    } else {
-                        revrotedChunks.push(rotateChunkToTheLeft(chunk));
-                    }
-                }
-            }
-        )
+        let revortedString: string = revrotString(stringChunks, sz);
 
-        return revrotedChunks.join("");
+        return revortedString;
     }
 }
 
@@ -37,6 +24,26 @@ function divideStringIntoChunksOfGivenSize(str: string, sz: number): string[]{
         end = end + sz;
     }
     return chunks;
+}
+
+function revrotString(stringChunks: string[], sz: number): string {
+    let revrotedChunks: string[] = [];
+
+    stringChunks.forEach(
+        chunk => {
+            if (chunk.length < sz){
+                return;
+            } else {
+                if (isSumOfCubes(chunk)){
+                    revrotedChunks.push(reverseChunk(chunk));
+                } else {
+                    revrotedChunks.push(rotateChunkToTheLeft(chunk));
+                }
+            }
+        }
+    )
+
+    return revrotedChunks.join("");
 }
 
 function isSumOfCubes(chunk: string): boolean {
